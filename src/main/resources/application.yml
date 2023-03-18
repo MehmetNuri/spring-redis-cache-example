@@ -1,0 +1,48 @@
+spring:
+  main:
+    allow-circular-references: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+      FAIL_ON_EMPTY_BEANS: false
+    deserialization:
+      unwrap-root-value: false
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 10000ms
+    connect-timeout: 20000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 8
+    password: secretpass
+  cache:
+    type: redis
+    redis:
+      time-to-live: 30
+      cache-null-values: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    show-sql: true
+    properties:
+      hibernate:
+        show_sql: true
+    database: postgresql
+
+
+clear:
+  all:
+    cache:
+      fixed:
+        rate:

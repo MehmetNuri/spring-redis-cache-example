@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: always
+
+  redis:
+    container_name: redis_container
+    image: redis:latest
+    command: redis-server --requirepass secretpass --appendonly yes
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data/redis
+    networks:
+      - redis
+
+networks:
+  postgres:
+    driver: bridge
+  redis:
+    driver: bridge
+
+volumes:
+  postgres:
+  redis:
